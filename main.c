@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.4 2001/12/24 01:24:51 luis Exp $
+/* $Id: main.c,v 1.5 2001/12/25 05:37:23 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
@@ -6,7 +6,7 @@
 
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.4 2001/12/24 01:24:51 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: main.c,v 1.5 2001/12/25 05:37:23 luis Exp $\n";
 
 int main (argc, argv)
 int argc;
@@ -14,12 +14,12 @@ char *argv [];
 {
 	int c;
 
+	inicializa_tablero (argc, argv);
 	initscr ();
 	raw();
 	noecho();
 	cbreak();
 	keypad (stdscr, 1);
-	inicializa_tablero (argc, argv);
 	pinta_tablero ();
 	for (;;) {
 		coloca_cursor ();
@@ -58,4 +58,4 @@ char *argv [];
 	}
 }
 
-/* $Id: main.c,v 1.4 2001/12/24 01:24:51 luis Exp $ */
+/* $Id: main.c,v 1.5 2001/12/25 05:37:23 luis Exp $ */
