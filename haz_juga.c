@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.6 2001/12/21 18:14:41 luis Exp $
+/* $Id: haz_juga.c,v 1.7 2001/12/24 01:17:41 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -70,70 +70,76 @@ void haz_jugada ()
 					tablero [p->y][p->x]
 					& MASCARA);
 			}
-		}
+		} /* if (tablero [p->y][p->x] & CUBIERTO) */
 		if (!quedan) {
 			beep ();
 			refresh ();
 			endwin ();
 			printf ("HAS GANADO ESTA VEZ, PRUEBA OTRA SI TE ATREVES.\n");
 			exit (0);
-		}
+		} /* if */
 		/* si el valor es 0 exploramos */
 		if ((tablero [p->y][p->x] & MASCARA) == 0) {
 			struct posicion *q;
 			if (p->y > 0) {
 				if (p->x > 0) {
-					if (tablero [p->y - 1][p->x - 1] & CUBIERTO)
+					if ((tablero [p->y - 1][p->x - 1] & CUBIERTO)
+						&& !(tablero[p->y - 1][p->x - 1] & MARCADO))
 					{
 						q = malloc (sizeof (struct posicion));
 						q->x = p->x - 1;
 						q->y = p->y - 1;
 						q->sig = lista_posiciones;
 						lista_posiciones = q;
-					}
-				}
-				if (tablero [p->y - 1][p->x] & CUBIERTO)
+					} /* if */
+				} /* if */
+				if ((tablero [p->y - 1][p->x] & CUBIERTO)
+					&& !(tablero [p->y - 1][p->x] & MARCADO))
 				{
 					q = malloc (sizeof (struct posicion));
 					q->x = p->x;
 					q->y = p->y - 1;
 					q->sig = lista_posiciones;
 					lista_posiciones = q;
-				}
+				} /* if */
 				if (p->x < columnas - 1) {
-					if (tablero [p->y - 1][p->x + 1] & CUBIERTO)
+					if ((tablero [p->y - 1][p->x + 1] & CUBIERTO)
+						&& !(tablero [p->y - 1][p->x + 1] & MARCADO))
 					{
 						q = malloc (sizeof (struct posicion));
 						q->x = p->x + 1;
 						q->y = p->y - 1;
 						q->sig = lista_posiciones;
 						lista_posiciones = q;
-					}
-				}
-			}
+					} /* if */
+				} /* if */
+			} /* if */
 			if (p->x > 0) {
-				if (tablero [p->y][p->x - 1] & CUBIERTO)
+				if ((tablero [p->y][p->x - 1] & CUBIERTO)
+					&& !(tablero [p->y][p->x - 1] & MARCADO))
 				{
 					q = malloc (sizeof (struct posicion));
 					q->x = p->x - 1;
 					q->y = p->y;
 					q->sig = lista_posiciones;
 					lista_posiciones = q;
-				}
-			}
+				} /* if */
+			} /* if */
 			if (p->x < columnas - 1) {
-				if (tablero [p->y][p->x + 1] & CUBIERTO)
+				if ((tablero [p->y][p->x + 1] & CUBIERTO)
+					&& !(tablero [p->y][p->x + 1] & MARCADO))
 				{
 					q = malloc (sizeof (struct posicion));
 					q->x = p->x + 1;
 					q->y = p->y;
 					q->sig = lista_posiciones;
 					lista_posiciones = q;
-				}
-			}
+				} /* if */
+			} /* if */
 			if (p->y < filas - 1) {
 				if (p->x > 0) {
-					if (tablero [p->y + 1][p->x - 1] & CUBIERTO)
+					if ((tablero [p->y + 1][p->x - 1] & CUBIERTO)
+						&& !(tablero [p->y + 1][p->x - 1] & MARCADO))
 					{
 						q = malloc (sizeof (struct posicion));
 						q->x = p->x - 1;
@@ -141,29 +147,31 @@ void haz_jugada ()
 						q->sig = lista_posiciones;
 						lista_posiciones = q;
 					}
-				}
-				if (tablero [p->y + 1][p->x] & CUBIERTO)
+				} /* if */
+				if ((tablero [p->y + 1][p->x] & CUBIERTO)
+					&& !(tablero [p->y + 1][p->x] & MARCADO))
 				{
 					q = malloc (sizeof (struct posicion));
 					q->x = p->x;
 					q->y = p->y + 1;
 					q->sig = lista_posiciones;
 					lista_posiciones = q;
-				}
+				} /* if */
 				if (p->x < columnas - 1) {
-					if (tablero [p->y + 1][p->x + 1] & CUBIERTO)
+					if ((tablero [p->y + 1][p->x + 1] & CUBIERTO)
+						&& !(tablero [p->y + 1][p->x + 1] & MARCADO))
 					{
 						q = malloc (sizeof (struct posicion));
 						q->x = p->x + 1;
 						q->y = p->y + 1;
 						q->sig = lista_posiciones;
 						lista_posiciones = q;
-					}
-				}
-			}
-		}
+					} /* if */
+				} /* if */
+			} /* if */
+		} /* if ((tablero [p->y][p->x] & MASCARA) == 0) */
 		free (p);
-	}
+	} /* while (lista_posiciones) */
 } /* haz_jugada */
 
 void marca_casilla()
@@ -178,4 +186,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.6 2001/12/21 18:14:41 luis Exp $ */
+/* $Id: haz_juga.c,v 1.7 2001/12/24 01:17:41 luis Exp $ */
