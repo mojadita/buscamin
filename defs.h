@@ -5,6 +5,11 @@
 
 #include <curses.h>
 #include <stdio.h>
+
+#ifndef NULL
+#define NULL 0
+#endif
+
 extern int filas;
 extern int columnas;
 extern int pos_x;

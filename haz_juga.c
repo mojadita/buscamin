@@ -6,8 +6,6 @@
 #include <malloc.h>
 #include "defs.h"
 
-#define NULL 0
-
 struct posicion {
 	int x;
 	int y;
