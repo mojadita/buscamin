@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.9 2002/02/06 13:32:10 luis Exp $
+/* $Id: main.c,v 1.10 2002/02/06 13:39:40 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
@@ -6,7 +6,7 @@
 
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.9 2002/02/06 13:32:10 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: main.c,v 1.10 2002/02/06 13:39:40 luis Exp $\n";
 
 int main (argc, argv)
 int argc;
@@ -39,35 +39,35 @@ char *argv [];
 			pos_y -= n ? n : 1; n = 0;
 			if (pos_y < 0) pos_y = 0;
 			break;
-		case 'K':
+		case 'K': n = 0;
 			pos_y = 0; break;
 		case KEY_DOWN: case 'j':
 			pos_y += n ? n : 1; n = 0;
 			if (pos_y >= filas) pos_y = filas - 1;
 			break;
-		case 'J':
+		case 'J': n = 0;
 			pos_y = filas - 1;
 			break;
 		case KEY_LEFT: case 'h':
 			pos_x -= n ? n : 1; n = 0;
 			if (pos_x <= 0) pos_x = 0;
 			break;
-		case 'H':
+		case 'H': n = 0;
 			pos_x = 0; break;
 		case KEY_RIGHT: case 'l':
 			pos_x += n ? n : 1; n = 0;
 			if (pos_x >= columnas) pos_x = columnas - 1;
 			break;
-		case 'L':
+		case 'L': n = 0;
 			pos_x = columnas - 1; break;
-		case KEY_ENTER: case KEY_ESP: case 'c':
+		case KEY_ENTER: case KEY_ESP: case 'c': n = 0;
 			haz_jugada (); break;
-		case 'x': case 'X':
+		case 'x': case 'X': n = 0;
 			marca_casilla (); break;
-		default:
+		default: n = 0;
 			beep ();
 		} /* switch */
 	} /* for(;;) */
 } /* main */
 
-/* $Id: main.c,v 1.9 2002/02/06 13:32:10 luis Exp $ */
+/* $Id: main.c,v 1.10 2002/02/06 13:39:40 luis Exp $ */
