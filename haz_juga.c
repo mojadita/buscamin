@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.4 2001/12/17 18:37:09 luis Exp $
+/* $Id: haz_juga.c,v 1.5 2001/12/18 00:00:31 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -45,16 +45,19 @@ void haz_jugada ()
 				for (y = 0; y < filas; y++) {
 					for (x = 0; x < columnas; x++) {
 						move(y+2, 2*x + 3);
-						if (tablero[y][x] & MINA) {
+						if (x == pos_x && y == pos_y) {
+							addstr("*");
+						} else if ((tablero[y][x] & MINA) &&
+							!(tablero[y][x] & MARCADO)) {
 							addstr("#");
-						} else if (tablero [y][x] & MARCADO) {
+						} else if (!(tablero[y][x] & MINA) &&
+							(tablero [y][x] & MARCADO)) {
 							addstr("?");
 						}
 					}
 				}
-				mvaddstr (p->y+2, 2*p->x + 3, "*");
 				refresh ();
-				sleep(5);
+				sleep(3);
 				endwin ();
 				printf ("HA TOCADO UNA MINA!!!\n");
 				exit (0);
@@ -174,4 +177,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.4 2001/12/17 18:37:09 luis Exp $ */
+/* $Id: haz_juga.c,v 1.5 2001/12/18 00:00:31 luis Exp $ */
