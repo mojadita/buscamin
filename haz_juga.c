@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $
+/* $Id: haz_juga.c,v 1.13 2002/01/18 14:08:50 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.13 2002/01/18 14:08:50 luis Exp $\n";
 
 struct posicion {
 	int x;
@@ -54,7 +54,6 @@ void haz_jugada ()
 		if (tablero [p->y][p->x] & CUBIERTO) {
 			/* DESCUBRIMOS */
 			tablero [p->y][p->x] &= ~CUBIERTO;
-			quedan--;
 			move (p->y + 2, 2 * p->x + 3);
 			if (tablero [p->y][p->x] & MINA) {
 				revela_tablero();
@@ -66,6 +65,7 @@ void haz_jugada ()
 				endwin ();
 				exit (1);
 			}
+			quedan--;
 			if ((tablero [p->y][p->x] & MASCARA) == 0) {
 				addstr (" ");
 			} else {
@@ -193,4 +193,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $ */
+/* $Id: haz_juga.c,v 1.13 2002/01/18 14:08:50 luis Exp $ */
