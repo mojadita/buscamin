@@ -1,4 +1,5 @@
-/* coloca_cursor.c -- rutina para colocar el cursor en la posicion ade-
+/* $Id: coloca_c.c,v 1.2 2001/12/17 18:37:09 luis Exp $
+ * coloca_cursor.c -- rutina para colocar el cursor en la posicion ade-
  *	cuada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -12,4 +13,4 @@ void coloca_cursor ()
 	refresh ();
 }
 
-/* fin de coloca_cursor.c */
+/* $Id: coloca_c.c,v 1.2 2001/12/17 18:37:09 luis Exp $ */

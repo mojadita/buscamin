@@ -1,4 +1,5 @@
-/* pinta_tablero.c -- rutina para pintar el tablero.
+/* $Id: pinta_ta.c,v 1.2 2001/12/17 18:37:09 luis Exp $
+ * pinta_tablero.c -- rutina para pintar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
  */
@@ -32,3 +33,5 @@ void pinta_tablero ()
 	move (1,3);
 	printw ("%d-", quedan);
 }
+
+/* $Id: pinta_ta.c,v 1.2 2001/12/17 18:37:09 luis Exp $ */

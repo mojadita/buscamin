@@ -1,4 +1,5 @@
-/* inicializa_tablero.c -- funcion para inicializar el tablero.
+/* $Id: iniciali.c,v 1.2 2001/12/17 18:37:09 luis Exp $
+ * inicializa_tablero.c -- funcion para inicializar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
  */
@@ -94,5 +95,4 @@ char **argv;
 	printf ("num_minas == %d\n", num_minas);
 }
 
-/* fin de inicializa_tablero.c */
-
+/* $Id: iniciali.c,v 1.2 2001/12/17 18:37:09 luis Exp $ */

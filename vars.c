@@ -1,4 +1,5 @@
-/* vars.c -- variables globales del juego del buscaminas.
+/* $Id: vars.c,v 1.2 2001/12/17 18:37:09 luis Exp $
+ * vars.c -- variables globales del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
  */
@@ -14,4 +15,4 @@ int quedan;
 
 int x_salv, y_salv;
 
-/* fin de vars.c */
+/* $Id: vars.c,v 1.2 2001/12/17 18:37:09 luis Exp $ */

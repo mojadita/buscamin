@@ -1,4 +1,5 @@
-/* main.c -- programa principal del juego del buscaminas.
+/* $Id: main.c,v 1.3 2001/12/17 18:37:09 luis Exp $
+ * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
  */
@@ -54,3 +55,5 @@ char *argv [];
 		}
 	}
 }
+
+/* $Id: main.c,v 1.3 2001/12/17 18:37:09 luis Exp $ */
