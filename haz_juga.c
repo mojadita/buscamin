@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $
+/* $Id: haz_juga.c,v 1.9 2001/12/25 05:03:44 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.9 2001/12/25 05:03:44 luis Exp $\n";
 
 struct posicion {
 	int x;
@@ -15,6 +15,23 @@ struct posicion {
 	struct posicion *ant;
 	struct posicion *sig;
 };
+
+void revela_tablero()
+{
+	int x, y;
+	for (y = 0; y < filas; y++) {
+		for (x = 0; x < columnas; x++) {
+			move(y+2, 2*x + 3);
+			if ((tablero[y][x] & MINA) &&
+				!(tablero[y][x] & MARCADO)) {
+				addstr("#");
+			} else if (!(tablero[y][x] & MINA) &&
+				(tablero [y][x] & MARCADO)) {
+				addstr("?");
+			}
+		}
+	}
+} /* revela_tablero */
 
 void haz_jugada ()
 {
@@ -42,22 +59,8 @@ void haz_jugada ()
 			printw ("%d-", quedan);
 			move (p->y + 2, 2 * p->x + 3);
 			if (tablero [p->y][p->x] & MINA) {
-				int x, y;
+				revela_tablero();
 				beep ();
-				for (y = 0; y < filas; y++) {
-					for (x = 0; x < columnas; x++) {
-						move(y+2, 2*x + 3);
-						if (x == pos_x && y == pos_y) {
-							addstr("*");
-						} else if ((tablero[y][x] & MINA) &&
-							!(tablero[y][x] & MARCADO)) {
-							addstr("#");
-						} else if (!(tablero[y][x] & MINA) &&
-							(tablero [y][x] & MARCADO)) {
-							addstr("?");
-						}
-					}
-				}
 				mvaddstr(pos_y+2, 2*pos_x+2, "[*]");
 				refresh ();
 				sleep(3);
@@ -74,6 +77,7 @@ void haz_jugada ()
 			}
 		} /* if (tablero [p->y][p->x] & CUBIERTO) */
 		if (!quedan) {
+			revela_tablero();
 			beep ();
 			refresh ();
 			endwin ();
@@ -188,4 +192,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $ */
+/* $Id: haz_juga.c,v 1.9 2001/12/25 05:03:44 luis Exp $ */
