@@ -1,15 +1,19 @@
-/* $Id: defs.h,v 1.5 2001/12/17 18:37:09 luis Exp $
+/* $Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $
  * defs.h -- fichero con definiciones para el juego del buscaminas.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
  */
 
+#ifndef _defs_h
+#define _defs_h
 #include <curses.h>
 #include <stdio.h>
 
 #ifndef NULL
 #define NULL 0
 #endif
+
+static char RCS_Id_defs_h[] = "\n$Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $\n";
 
 extern int filas;
 extern int columnas;
@@ -40,4 +44,5 @@ void haz_jugada ();
 #define randomize() srand (time (0))
 #define random(N) (rand () % (N))
 
-/* $Id: defs.h,v 1.5 2001/12/17 18:37:09 luis Exp $ */
+#endif
+/* $Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $ */

@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.7 2001/12/24 01:17:41 luis Exp $
+/* $Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -6,6 +6,8 @@
 
 #include <malloc.h>
 #include "defs.h"
+
+static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $\n";
 
 struct posicion {
 	int x;
@@ -186,4 +188,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.7 2001/12/24 01:17:41 luis Exp $ */
+/* $Id: haz_juga.c,v 1.8 2001/12/24 01:24:51 luis Exp $ */
