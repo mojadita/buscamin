@@ -28,7 +28,7 @@ void haz_jugada ();
 #define MINA		0x40
 #define MASCARA		0x0f
 
-#define PROBAB		20	/* la probabilidad de mina es del 20% */
+#define PROBAB		15	/* la probabilidad de mina */
 
 #define randomize() srand (time (0))
 #define random(N) (rand () % (N))
