@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.5 2001/12/18 00:00:31 luis Exp $
+/* $Id: haz_juga.c,v 1.6 2001/12/21 18:14:41 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -56,6 +56,7 @@ void haz_jugada ()
 						}
 					}
 				}
+				mvaddstr(pos_y+2, 2*pos_x+2, "[*]");
 				refresh ();
 				sleep(3);
 				endwin ();
@@ -177,4 +178,4 @@ void marca_casilla()
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.5 2001/12/18 00:00:31 luis Exp $ */
+/* $Id: haz_juga.c,v 1.6 2001/12/21 18:14:41 luis Exp $ */
