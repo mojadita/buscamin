@@ -46,6 +46,9 @@ char *argv [];
 		case KEY_ESP:
 			haz_jugada ();
 			break;
+		case 'x': case 'X':
+			marca_casilla ();
+			break;
 		default:
 			beep ();
 		}

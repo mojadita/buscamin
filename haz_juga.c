@@ -17,7 +17,8 @@ void haz_jugada ()
 {
 	struct posicion *lista_posiciones, *p;
 
-	if (!(tablero [pos_y][pos_x] & CUBIERTO)) {
+	if (!(tablero [pos_y][pos_x] & CUBIERTO) ||
+		(tablero [pos_y][pos_x] & MARCADO)) {
 		beep ();
 		return;
 	}
@@ -38,9 +39,21 @@ void haz_jugada ()
 			printw ("%d-", quedan);
 			move (p->y + 2, 2 * p->x + 3);
 			if (tablero [p->y][p->x] & MINA) {
+				int x, y;
 				beep ();
-				addstr ("#");
+				for (y = 0; y < filas; y++) {
+					for (x = 0; x < columnas; x++) {
+						move(y+2, 2*x + 3);
+						if (tablero[y][x] & MINA) {
+							addstr("#");
+						} else if (tablero [y][x] & MARCADO) {
+							addstr("?");
+						}
+					}
+				}
+				mvaddstr (p->y+2, 2*p->x + 3, "*");
 				refresh ();
+				sleep(5);
 				endwin ();
 				printf ("HA TOCADO UNA MINA!!!\n");
 				exit (0);
@@ -146,6 +159,18 @@ void haz_jugada ()
 		}
 		free (p);
 	}
-}
+} /* haz_jugada */
+
+void marca_casilla()
+{
+	if (!(tablero [pos_y][pos_x] & CUBIERTO)) {
+		beep ();
+		return;
+	}
+	tablero [pos_y][pos_x] ^= MARCADO;
+	mvaddstr (pos_y + 2, 2 * pos_x + 3,
+		(tablero[pos_y][pos_x] & MARCADO) ? "@" : ".");
+
+} /* marca_posicion */
 
 /* fin de haz_jugada.c */

@@ -31,6 +31,7 @@ void haz_jugada ();
 
 #define CUBIERTO	0x80
 #define MINA		0x40
+#define MARCADO		0x20
 #define MASCARA		0x0f
 
 #define PROBAB		15	/* la probabilidad de mina */
