@@ -1,4 +1,4 @@
-/* $Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $
+/* $Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $
  * defs.h -- fichero con definiciones para el juego del buscaminas.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -13,7 +13,25 @@
 #define NULL 0
 #endif
 
-static char RCS_Id_defs_h[] = "\n$Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $\n";
+#ifdef ACS_ULCORNER /* si ncurses.h */
+#define HLINE()		addch(ACS_HLINE); addch(ACS_HLINE);
+#define VLINE()		addch(ACS_VLINE);
+#define ULCORNER()	addch(ACS_ULCORNER); addch(ACS_HLINE);
+#define URCORNER()	addch(ACS_URCORNER);
+#define LLCORNER()	addch(ACS_LLCORNER); addch(ACS_HLINE);
+#define LRCORNER()	addch(ACS_LRCORNER);
+#define NUMBER()	mvprintw (1,3,"<%d,%d>", num_minas, quedan); addch(ACS_HLINE);
+#else /* curses.h normal */
+#define HLINE()		addstr ("--");
+#define VLINE()		addch('|');
+#define ULCORNER()	addstr ("+-");
+#define URCORNER()	addstr ("+");
+#define LLCORNER()	addstr ("+-");
+#define LRCORNER()	addstr ("+");
+#define NUMBER()	mvprintw (1,3,"<%d,%d>-", num_minas, quedan);
+#endif
+
+static char RCS_Id_defs_h[] = "\n$Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $\n";
 
 extern int filas;
 extern int columnas;
@@ -45,4 +63,4 @@ void haz_jugada ();
 #define random(N) (rand () % (N))
 
 #endif
-/* $Id: defs.h,v 1.6 2001/12/24 01:24:51 luis Exp $ */
+/* $Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $ */

@@ -1,4 +1,4 @@
-/* $Id: pinta_ta.c,v 1.3 2001/12/24 01:24:51 luis Exp $
+/* $Id: pinta_ta.c,v 1.4 2002/01/18 11:55:12 luis Exp $
  * pinta_tablero.c -- rutina para pintar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -6,7 +6,7 @@
 
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: pinta_ta.c,v 1.3 2001/12/24 01:24:51 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: pinta_ta.c,v 1.4 2002/01/18 11:55:12 luis Exp $\n";
 
 void pinta_tablero ()
 {
@@ -16,24 +16,26 @@ void pinta_tablero ()
 	alto = filas + 2;
 
 	clear ();
-	mvaddstr (1, 1, "+-");
+	move(1,1);
+	ULCORNER();
 	for (i = 0; i < columnas; i++) {
-		addstr ("--");
+		HLINE();
 	}
-	addstr ("+");
+	URCORNER();
 	for (i = 0; i < filas; i++) {
-		mvaddstr (i + 2, 1, "| ");
+		move(i+2,1);
+		VLINE();
+		addch(' ');
 		for (j = 0; j < columnas; j++)
 			addstr (". ");
-		addstr ("|");
+		VLINE();
 	}
-	mvaddstr (filas + 2, 1, "+-");
+	move(filas+2,1);
+	LLCORNER();
 	for (i = 0; i < columnas; i++) {
-		addstr ("--");
+		HLINE();
 	}
-	addstr ("+");
-	move (1,3);
-	printw ("%d-", quedan);
-}
+	LRCORNER();
+} /* pinta_tablero */
 
-/* $Id: pinta_ta.c,v 1.3 2001/12/24 01:24:51 luis Exp $ */
+/* $Id: pinta_ta.c,v 1.4 2002/01/18 11:55:12 luis Exp $ */

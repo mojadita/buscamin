@@ -1,4 +1,4 @@
-/* $Id: haz_juga.c,v 1.11 2001/12/25 05:24:40 luis Exp $
+/* $Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $
  * haz_jugada.c -- rutina para efectuar una jugada.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.11 2001/12/25 05:24:40 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $\n";
 
 struct posicion {
 	int x;
@@ -55,13 +55,12 @@ void haz_jugada ()
 			/* DESCUBRIMOS */
 			tablero [p->y][p->x] &= ~CUBIERTO;
 			quedan--;
-			move (1, 3);
-			printw ("%d-", quedan);
 			move (p->y + 2, 2 * p->x + 3);
 			if (tablero [p->y][p->x] & MINA) {
 				revela_tablero();
 				beep ();
 				mvaddstr(pos_y+2, 2*pos_x+2, "[*]");
+				NUMBER();
 				mvaddstr (filas+3, 0, "HA TOCADO UNA MINA!!!");
 				refresh ();
 				endwin ();
@@ -78,6 +77,7 @@ void haz_jugada ()
 		if (!quedan) {
 			revela_tablero();
 			beep ();
+			NUMBER();
 			mvaddstr (filas+3, 0,
 				"HAS GANADO ESTA VEZ, PRUEBA OTRA SI TE ATREVES ;)");
 			refresh ();
@@ -189,7 +189,8 @@ void marca_casilla()
 	tablero [pos_y][pos_x] ^= MARCADO;
 	mvaddstr (pos_y + 2, 2 * pos_x + 3,
 		(tablero[pos_y][pos_x] & MARCADO) ? "@" : ".");
+	num_minas += (tablero[pos_y][pos_x] & MARCADO) ? -1 : +1;
 
 } /* marca_posicion */
 
-/* $Id: haz_juga.c,v 1.11 2001/12/25 05:24:40 luis Exp $ */
+/* $Id: haz_juga.c,v 1.12 2002/01/18 11:55:12 luis Exp $ */
