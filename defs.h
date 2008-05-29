@@ -1,4 +1,4 @@
-/* $Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $
+/* $Id: defs.h,v 1.8 2008/05/29 21:15:02 luis Exp $
  * defs.h -- fichero con definiciones para el juego del buscaminas.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -31,7 +31,7 @@
 #define NUMBER()	mvprintw (1,3,"<%d,%d>-", num_minas, quedan);
 #endif
 
-static char RCS_Id_defs_h[] = "\n$Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $\n";
+static char RCS_Id_defs_h[] = "\n$Id: defs.h,v 1.8 2008/05/29 21:15:02 luis Exp $\n";
 
 extern int filas;
 extern int columnas;
@@ -57,10 +57,10 @@ void haz_jugada ();
 #define MARCADO		0x20
 #define MASCARA		0x0f
 
-#define PROBAB		15	/* la probabilidad de mina */
+#define PROBAB		12	/* la probabilidad de mina */
 
 #define randomize() srand (time (0))
 #define random(N) (rand () % (N))
 
 #endif
-/* $Id: defs.h,v 1.7 2002/01/18 11:55:12 luis Exp $ */
+/* $Id: defs.h,v 1.8 2008/05/29 21:15:02 luis Exp $ */

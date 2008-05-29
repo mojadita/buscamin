@@ -1,4 +1,4 @@
-/* $Id: iniciali.c,v 1.4 2002/01/18 14:08:50 luis Exp $
+/* $Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $
  * inicializa_tablero.c -- funcion para inicializar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -9,7 +9,7 @@
 #include <getopt.h>
 #include "defs.h"
 
-static char RCS_Id[] = "\n$Id: iniciali.c,v 1.4 2002/01/18 14:08:50 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $\n";
 
 void inicializa_tablero (argc, argv)
 int argc;
@@ -20,6 +20,7 @@ char **argv;
 	int maxfilas = (LINES - 5), maxcolumnas = (COLS - 5) / 2;
 	randomize ();
 
+	filas = maxfilas; columnas = maxcolumnas;
 	while((res = getopt(argc, argv, "l:c:p:m")) != EOF) {
 		switch(res) {
 		case 'l': filas = atoi(optarg); break;
@@ -90,4 +91,4 @@ char **argv;
 	printf ("num_minas == %d\n", num_minas);
 }
 
-/* $Id: iniciali.c,v 1.4 2002/01/18 14:08:50 luis Exp $ */
+/* $Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $ */
