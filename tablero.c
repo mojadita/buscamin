@@ -1,4 +1,4 @@
-/* $Id: tablero.c,v 1.1 2014/04/09 13:59:41 luis Exp $
+/* $Id: tablero.c,v 1.2 2014/04/09 14:44:43 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
  * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -191,39 +191,8 @@ void setCursor(struct tablero *t)
 void doJugada(struct tablero *t, int x, int y)
 {
 	int i, j;
-	/* Si no est\'a marcado, no est\'a cubierto y el n\'umero de minas
-	 * es igual que el n\'umero de marcas alrededor hay que jugar todas
-	 * las casillas alrededor de la actual (salvo las marcadas). */
-#if 0
-	if (	!isMarked(t, x, y) /* no est\'a marcada */
-		&& !isCovered(t, x, y) /* no est\'a cubierta */
-		&&	numMines(t, x, y) /* hay minas alrededor */
-		&& (numMines(t, x, y) == numMarks(t, x, y)) /* numero de minas igual a numero de marcas */
-	) {
-		/* debemos jugar las ocho casillas de alrededor */
-		if (x > 0) {
-			if (y > 0)			doJugada(t, x-1, y-1);
-									doJugada(t, x-1, y  );
-			if (y < t->lin-1)	doJugada(t, x-1, y+1);
-		} /* if */
-		if (y > 0)				doJugada(t, x  , y-1);
-		if (y < t->lin-1)		doJugada(t, x  , y+1);
-		if (x < t->col-1) {
-			if (y > 0)			doJugada(t, x+1, y-1);
-									doJugada(t, x+1, y  );
-			if (y < t->lin-1)	doJugada(t, x+1, y+1);
-		} /* if */
-		return;
-	} /* if */
-#endif
 	if ((x < 0) || (x >= t->col) || (y < 0) || (y >= t->lin)) return;
-	if (isMarked(t, x, y)) {
-		/* intentamos jugar una posici\'on marcada, inv\'alido. */
-		beep();
-		return;
-	} /* if */
-	/* !isMarked */
-	if (!isCovered(t, x, y)) return;
+	if (isMarked(t, x, y) || !isCovered(t, x, y)) return;
 	/* !isMarked && isCovered */
 	uncover(t, x, y);
 	if (isMine(t, x, y)) {
@@ -244,19 +213,15 @@ void doJugada(struct tablero *t, int x, int y)
 	t->quedan--;
 	/* !isMarked && !isMine */
 	if (numMines(t, x, y) == 0) {
-		if (x > 0) {
-			if (y > 0)			doJugada(t, x-1, y-1);
-									doJugada(t, x-1, y  );
-			if (y < t->lin-1)	doJugada(t, x-1, y+1);
-		} /* if */
-		if (y > 0)				doJugada(t, x  , y-1);
-		if (y < t->lin-1)		doJugada(t, x  , y+1);
-		if (x < t->col-1) {
-			if (y > 0)			doJugada(t, x+1, y-1);
-									doJugada(t, x+1, y  );
-			if (y < t->lin-1)	doJugada(t, x+1, y+1);
-		} /* if */
+		doJugada(t, x-1, y-1);
+		doJugada(t, x-1, y  );
+		doJugada(t, x-1, y+1);
+		doJugada(t, x  , y-1);
+		doJugada(t, x  , y+1);
+		doJugada(t, x+1, y-1);
+		doJugada(t, x+1, y  );
+		doJugada(t, x+1, y+1);
 	} /* if */
 } /* doJugada */
 
-/* $Id: tablero.c,v 1.1 2014/04/09 13:59:41 luis Exp $ */
+/* $Id: tablero.c,v 1.2 2014/04/09 14:44:43 luis Exp $ */
