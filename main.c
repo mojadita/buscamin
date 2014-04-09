@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.12 2014/04/09 13:59:41 luis Exp $
+/* $Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
@@ -9,7 +9,7 @@
 #include "tablero.h"
 #include "iniciali.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.12 2014/04/09 13:59:41 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $\n";
 
 int main (int argc, char **argv)
 {
@@ -64,6 +64,21 @@ int main (int argc, char **argv)
 			break;
 		case 'L': n = 0;
 			t->x = t->col-1; break;
+		case 'x': case 'X':
+			n = 0;
+			if (isCovered(t, t->x, t->y)) {
+				switchMarked(t, t->x, t->y);
+
+				if (isMarked(t, t->x, t->y))
+					t->num_minas--;
+				else
+					t->num_minas++;
+				if (t->num_minas < 0) {
+					switchMarked(t, t->x, t->y);
+					t->num_minas++;
+				} /* if */
+				break;
+			} /* if */
 		case KEY_ENTER: case KEY_ESP:
 		case 'c': case 'C':
 			n = 0;
@@ -71,16 +86,17 @@ int main (int argc, char **argv)
 				&& !isMarked(t, t->x, t->y)
 				&& (numMines(t, t->x, t->y) == numMarks(t, t->x, t->y))
 			) {
-					doJugada(t, t->x-1, t->y-1);
-					doJugada(t, t->x-1, t->y  );
-					doJugada(t, t->x-1, t->y+1);
-					doJugada(t, t->x  , t->y-1);
-					doJugada(t, t->x  , t->y+1);
-					doJugada(t, t->x+1, t->y-1);
-					doJugada(t, t->x+1, t->y  );
-					doJugada(t, t->x+1, t->y+1);
-			} /* if */
-			doJugada(t, t->x, t->y);
+				/* jubamos las ocho casillas adyacentes */
+				doJugada(t, t->x-1, t->y-1);
+				doJugada(t, t->x-1, t->y  );
+				doJugada(t, t->x-1, t->y+1);
+				doJugada(t, t->x  , t->y-1);
+				doJugada(t, t->x  , t->y+1);
+				doJugada(t, t->x+1, t->y-1);
+				doJugada(t, t->x+1, t->y  );
+				doJugada(t, t->x+1, t->y+1);
+			} else
+				doJugada(t, t->x, t->y);
 			if (!t->quedan) {
 				NUMBER(t);
 				mvaddstr(t->lin+3, 0, "LAS SACASTE TODAS!!!");
@@ -91,17 +107,10 @@ int main (int argc, char **argv)
 				exit(0);
 			} /* if */
 			break;
-		case 'x': case 'X': n = 0;
-			switchMarked(t, t->x, t->y);
-			if (isMarked(t, t->x, t->y))
-				t->num_minas--;
-			else
-				t->num_minas++;
-			break;
 		default: n = 0;
 			beep ();
 		} /* switch */
 	} /* for(;;) */
 } /* main */
 
-/* $Id: main.c,v 1.12 2014/04/09 13:59:41 luis Exp $ */
+/* $Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $ */
