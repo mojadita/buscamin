@@ -1,0 +1,18 @@
+/* $Id: iniciali.h,v 1.1 2014/04/09 13:59:41 luis Exp $
+ * Author: Luis Colorado <lc@luiscoloradosistemas.com>Q
+ * Date: mié abr  9 12:22:45 CEST 2014
+ * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
+ * 				All rights reserved.
+ */ 
+
+#ifndef _INICIALI_H
+#define _INICIALI_H
+
+#include "tablero.h"
+
+static char RCS_Id_TABLERO_H[] = "\n$Id: iniciali.h,v 1.1 2014/04/09 13:59:41 luis Exp $\n";
+
+struct tablero *inicializa_tablero (int argc, char **argv);
+
+#endif /* _INICIALI_H */
+/* $Id: iniciali.h,v 1.1 2014/04/09 13:59:41 luis Exp $ */

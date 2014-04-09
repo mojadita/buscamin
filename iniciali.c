@@ -1,4 +1,4 @@
-/* $Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $
+/* $Id: iniciali.c,v 1.6 2014/04/09 13:59:41 luis Exp $
  * inicializa_tablero.c -- funcion para inicializar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -6,29 +6,34 @@
 
 #include <malloc.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <getopt.h>
-#include "defs.h"
+#include "tablero.h"
 
-static char RCS_Id[] = "\n$Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: iniciali.c,v 1.6 2014/04/09 13:59:41 luis Exp $\n";
 
-void inicializa_tablero (argc, argv)
-int argc;
-char **argv;
+struct tablero *inicializa_tablero (int argc, char **argv)
 {
 	int res, i, j;
 	int prob = PROBAB;
-	int maxfilas = (LINES - 5), maxcolumnas = (COLS - 5) / 2;
+	int maxfilas = (LINES - 5),
+		 maxcolumnas = (COLS - 3) / 2;
+	int filas, columnas;
+
 	randomize ();
 
-	filas = maxfilas; columnas = maxcolumnas;
-	while((res = getopt(argc, argv, "l:c:p:m")) != EOF) {
+	filas = maxfilas;
+	columnas = maxcolumnas;
+	while((res = getopt(argc, argv, "r:c:p:m")) != EOF) {
 		switch(res) {
-		case 'l': filas = atoi(optarg); break;
-		case 'c': columnas = atoi(optarg); break;
-		case 'p': prob = atoi(optarg); break;
-		case'm': filas = maxfilas; columnas = maxcolumnas; break;
+		case 'r': filas		= atoi(optarg);	break;
+		case 'c': columnas	= atoi(optarg);	break;
+		case 'p': prob			= atoi(optarg);	break;
+		case 'm': filas		= maxfilas;
+					 columnas	= maxcolumnas;		break;
 		} /* switch */
 	} /* while */
+
 	if (filas < 1) filas = 1;
 	if (filas > maxfilas) filas = maxfilas;
 	if (columnas < 1) columnas = 1;
@@ -37,58 +42,7 @@ char **argv;
 	if (prob > 99) prob = 99;
 
 	/* creamos el tablero */
-	tablero = malloc (filas * sizeof (char *));
-	for (i = 0; i < filas; i++) {
-		tablero [i] = malloc (columnas * sizeof (char));
-		for (j = 0; j < columnas; j++) {
-			res = random (100) < prob;
-			if (res) {
-				tablero [i][j] = MINA | CUBIERTO;
-				num_minas++;
-			} else {
-				tablero [i][j] = CUBIERTO;
-			}
-		}
-	}
-	/* inicializamos los valores de las variables */
-	for (i = 0; i < filas; i++) {
-		for (j = 0; j < columnas; j++) {
-			if (i > 0) {
-				if (j > 0) {
-					if (tablero [i-1][j-1] & MINA)
-						tablero [i][j]++;
-				}
-				if (tablero [i-1][j] & MINA)
-					tablero [i][j]++;
-				if (j < columnas - 1) {
-					if (tablero [i-1][j+1] & MINA)
-						tablero [i][j]++;
-				}
-			}
-			if (j > 0) {
-				if (tablero [i][j-1] & MINA)
-					tablero [i][j]++;
-			}
-			if (j < columnas - 1) {
-				if (tablero [i][j+1] & MINA)
-					tablero [i][j]++;
-			}
-			if (i < filas - 1) {
-				if (j > 0) {
-					if (tablero [i+1][j-1] & MINA)
-						tablero [i][j]++;
-				}
-				if (tablero [i+1][j] & MINA)
-					tablero [i][j]++;
-				if (j < columnas - 1) {
-					if (tablero [i+1][j+1] & MINA)
-						tablero [i][j]++;
-				}
-			}
-		} /* for j */
-	} /* for i */
-	quedan = filas * columnas - num_minas;
-	printf ("num_minas == %d\n", num_minas);
+	return new_tablero(columnas, filas, prob);
 }
 
-/* $Id: iniciali.c,v 1.5 2008/05/29 21:15:02 luis Exp $ */
+/* $Id: iniciali.c,v 1.6 2014/04/09 13:59:41 luis Exp $ */
