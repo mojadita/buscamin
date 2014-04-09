@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $
+/* $Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
@@ -9,7 +9,7 @@
 #include "tablero.h"
 #include "iniciali.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $\n";
 
 int main (int argc, char **argv)
 {
@@ -64,6 +64,10 @@ int main (int argc, char **argv)
 			break;
 		case 'L': n = 0;
 			t->x = t->col-1; break;
+		case 12: /* ctrl-L */
+			clear(); 
+			drawTablero(t);
+			break;
 		case 'x': case 'X':
 			n = 0;
 			if (isCovered(t, t->x, t->y)) {
@@ -113,4 +117,4 @@ int main (int argc, char **argv)
 	} /* for(;;) */
 } /* main */
 
-/* $Id: main.c,v 1.13 2014/04/09 15:47:21 luis Exp $ */
+/* $Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $ */
