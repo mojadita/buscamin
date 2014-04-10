@@ -1,4 +1,4 @@
-/* $Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $
+/* $Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
  * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -12,7 +12,7 @@
 #include "tablero.h"
 
 static char RCS_Id_tablero_c[] =
-"\n$Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $\n";
+"\n$Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $\n";
 
 struct tablero *new_tablero(int dim_x, int dim_y, int prob)
 {
@@ -183,7 +183,7 @@ void drawTablero(struct tablero *t)
 
 	clear();
 	mvaddstr(0,0,
-			"BUSCAMIN: (C) 1.995-2.014 Luis Colorado "
+			"BUSCAMIN V-1.0: (C) 1.995-2.014 Luis Colorado "
 			"<lc@luiscoloradosistemas.com>");
 	drawFrame(t);
 	for (y = 0; y < t->lin; y++)
@@ -250,4 +250,4 @@ int message(struct tablero *t, char *fmt, ...)
 } /* message */
 	
 
-/* $Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $ */
+/* $Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $ */
