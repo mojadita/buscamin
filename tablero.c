@@ -1,4 +1,4 @@
-/* $Id: tablero.c,v 1.4 2014/04/10 14:07:35 luis Exp $
+/* $Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
  * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -10,6 +10,9 @@
 #include <curses.h>
 #include <assert.h>
 #include "tablero.h"
+
+static char RCS_Id_tablero_c[] =
+"\n$Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $\n";
 
 struct tablero *new_tablero(int dim_x, int dim_y, int prob)
 {
@@ -247,4 +250,4 @@ int message(struct tablero *t, char *fmt, ...)
 } /* message */
 	
 
-/* $Id: tablero.c,v 1.4 2014/04/10 14:07:35 luis Exp $ */
+/* $Id: tablero.c,v 1.5 2014/04/10 14:18:22 luis Exp $ */

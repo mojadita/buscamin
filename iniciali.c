@@ -1,4 +1,4 @@
-/* $Id: iniciali.c,v 1.7 2014/04/10 13:03:16 luis Exp $
+/* $Id: iniciali.c,v 1.8 2014/04/10 14:18:22 luis Exp $
  * inicializa_tablero.c -- funcion para inicializar el tablero.
  * Autor: Luis Colorado.
  * Version: 1.00 (30.1.93)
@@ -10,7 +10,8 @@
 #include <getopt.h>
 #include "tablero.h"
 
-static char RCS_Id[] = "\n$Id: iniciali.c,v 1.7 2014/04/10 13:03:16 luis Exp $\n";
+static char RCS_Id_INICIALI_C[] =
+"\n$Id: iniciali.c,v 1.8 2014/04/10 14:18:22 luis Exp $\n";
 
 struct tablero *inicializa_tablero (int argc, char **argv)
 {
@@ -45,4 +46,4 @@ struct tablero *inicializa_tablero (int argc, char **argv)
 	return new_tablero(columnas, filas, prob);
 }
 
-/* $Id: iniciali.c,v 1.7 2014/04/10 13:03:16 luis Exp $ */
+/* $Id: iniciali.c,v 1.8 2014/04/10 14:18:22 luis Exp $ */

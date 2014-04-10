@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.16 2014/04/10 14:07:35 luis Exp $
+/* $Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado <lc@luiscoloradosistemas.com>
  * Version: 1.00 (30.1.93)
@@ -11,7 +11,8 @@
 #include "tablero.h"
 #include "iniciali.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.16 2014/04/10 14:07:35 luis Exp $\n";
+static char RCS_Id[] =
+"\n$Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $\n";
 
 int main (int argc, char **argv)
 {
@@ -153,4 +154,4 @@ int main (int argc, char **argv)
 	} /* for(;;) */
 } /* main */
 
-/* $Id: main.c,v 1.16 2014/04/10 14:07:35 luis Exp $ */
+/* $Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $ */
