@@ -1,6 +1,8 @@
-# $Id: Makefile,v 1.6 2014/04/10 13:03:16 luis Exp $
+# $Id: Makefile,v 1.7 2014/04/10 14:14:20 luis Exp $
 # Date: Fri Nov 18 20:23:14 CET 2011
 # Author: Luis Colorado <lc@luiscoloradosistemas.com>
+# Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
+#		All rights reserved.
 # 
 
 RM=rm -f
@@ -20,4 +22,4 @@ buscamin: $(BUSCAMIN_OBJS)
 $(BUSCAMIN_OBJS): tablero.h
 main.o iniciali.o: iniciali.h
 
-# $Id: Makefile,v 1.6 2014/04/10 13:03:16 luis Exp $
+# $Id: Makefile,v 1.7 2014/04/10 14:14:20 luis Exp $
