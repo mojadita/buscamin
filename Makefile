@@ -1,7 +1,9 @@
-# $Id: Makefile,v 1.5 2014/04/09 13:59:41 luis Exp $
+# $Id: Makefile,v 1.6 2014/04/10 13:03:16 luis Exp $
 # Date: Fri Nov 18 20:23:14 CET 2011
 # Author: Luis Colorado <lc@luiscoloradosistemas.com>
 # 
+
+RM=rm -f
 
 .PHONY: all clean
 
@@ -18,4 +20,4 @@ buscamin: $(BUSCAMIN_OBJS)
 $(BUSCAMIN_OBJS): tablero.h
 main.o iniciali.o: iniciali.h
 
-# $Id: Makefile,v 1.5 2014/04/09 13:59:41 luis Exp $
+# $Id: Makefile,v 1.6 2014/04/10 13:03:16 luis Exp $

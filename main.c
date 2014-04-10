@@ -1,4 +1,4 @@
-/* $Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $
+/* $Id: main.c,v 1.15 2014/04/10 13:03:16 luis Exp $
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado
  * Version: 1.00 (30.1.93)
@@ -9,7 +9,7 @@
 #include "tablero.h"
 #include "iniciali.h"
 
-static char RCS_Id[] = "\n$Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $\n";
+static char RCS_Id[] = "\n$Id: main.c,v 1.15 2014/04/10 13:03:16 luis Exp $\n";
 
 int main (int argc, char **argv)
 {
@@ -29,60 +29,86 @@ int main (int argc, char **argv)
 		setCursor(t);
 		refresh();
 		c = getch();
+
 		switch (c) {
 		case '0': case '1': case '2': case '3': case '4':
 		case '5': case '6': case '7': case '8': case '9':
 			n *= 10; n += c - '0';
+			message(t, "N = %d", n);
 			break;
 		case KEY_ESC: case KEY_BREAK:
-			n = 0; break;
+			n = 0;
+			message(t, "");
+			break;
+
 		case 'Q': case 'q':
+			message(t, "Saliendo a peticion del usuario");
+			refresh();
 			endwin ();
 			exit(2);
+
 		case KEY_UP: case 'k':
 			t->y -= n ? n : 1; n = 0;
 			if (t->y < 0) t->y = 0;
+			message(t, "");
 			break;
+
 		case 'K': n = 0;
-			t->y = 0; break;
+			t->y = 0;
+			message(t, "");
+			break;
+
 		case KEY_DOWN: case 'j':
 			t->y += n ? n : 1; n = 0;
 			if (t->y >= t->lin) t->y = t->lin - 1;
+			message(t, "");
 			break;
+
 		case 'J': n = 0;
 			t->y = t->lin-1;
+			message(t, "");
 			break;
+
 		case KEY_LEFT: case 'h':
 			t->x -= n ? n : 1; n = 0;
 			if (t->x <= 0) t->x = 0;
+			message(t, "");
 			break;
+
 		case 'H': n = 0;
-			t->x = 0; break;
+			t->x = 0;
+			message(t, "");
+			break;
+
 		case KEY_RIGHT: case 'l':
 			t->x += n ? n : 1; n = 0;
 			if (t->x >= t->col) t->x = t->col-1;
+			message(t, "");
 			break;
+
 		case 'L': n = 0;
-			t->x = t->col-1; break;
-		case 12: /* ctrl-L */
+			t->x = t->col-1;
+			message(t, "");
+			break;
+
+		case KEY_CTRL_L:
 			clear(); 
 			drawTablero(t);
 			break;
+
 		case 'x': case 'X':
 			n = 0;
 			if (isCovered(t, t->x, t->y)) {
 				switchMarked(t, t->x, t->y);
-
-				if (isMarked(t, t->x, t->y))
-					t->num_minas--;
-				else
-					t->num_minas++;
-				if (t->num_minas < 0) {
-					switchMarked(t, t->x, t->y);
-					t->num_minas++;
-				} /* if */
+				message(t,
+					"Marca %s en (%d, %d)",
+					isMarked(t, t->x, t->y)
+						? "puesta"
+						: "quitada",
+					t->x, t->y);
 				break;
 			} /* if */
+			/* NO BREAK HERE */
 		case KEY_ENTER: case KEY_ESP:
 		case 'c': case 'C':
 			n = 0;
@@ -90,7 +116,7 @@ int main (int argc, char **argv)
 				&& !isMarked(t, t->x, t->y)
 				&& (numMines(t, t->x, t->y) == numMarks(t, t->x, t->y))
 			) {
-				/* jubamos las ocho casillas adyacentes */
+				/* jugamos las ocho casillas adyacentes */
 				doJugada(t, t->x-1, t->y-1);
 				doJugada(t, t->x-1, t->y  );
 				doJugada(t, t->x-1, t->y+1);
@@ -99,22 +125,28 @@ int main (int argc, char **argv)
 				doJugada(t, t->x+1, t->y-1);
 				doJugada(t, t->x+1, t->y  );
 				doJugada(t, t->x+1, t->y+1);
+				message(t, "Jugamos 8 casillas adyacentes");
 			} else
 				doJugada(t, t->x, t->y);
 			if (!t->quedan) {
-				NUMBER(t);
-				mvaddstr(t->lin+3, 0, "LAS SACASTE TODAS!!!");
+				message(t, "LAS SACASTE TODAS!!!");
 				beep();
 				refresh();
 				sleep(3);
 				endwin();
 				exit(0);
 			} /* if */
+			if (t->quedan < 10)
+				message(t, "Quedan: %d", t->quedan);
 			break;
+
 		default: n = 0;
 			beep ();
+			message(t, "");
+			break;
+
 		} /* switch */
 	} /* for(;;) */
 } /* main */
 
-/* $Id: main.c,v 1.14 2014/04/09 21:48:50 luis Exp $ */
+/* $Id: main.c,v 1.15 2014/04/10 13:03:16 luis Exp $ */

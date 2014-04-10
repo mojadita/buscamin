@@ -1,4 +1,4 @@
-/* $Id: tablero.c,v 1.2 2014/04/09 14:44:43 luis Exp $
+/* $Id: tablero.c,v 1.3 2014/04/10 13:03:16 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
  * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -20,6 +20,7 @@ struct tablero *new_tablero(int dim_x, int dim_y, int prob)
 	res->lin = dim_y;
 	res->col = dim_x;
 	res->x = res->y = 0;
+	res->num_minas = 0;
 
 	assert(res->tablero = calloc(res->lin, sizeof (char *)));
 
@@ -97,19 +98,24 @@ int numMarks(struct tablero *t, int x, int y)
 void switchMarked(struct tablero *t, int x, int y)
 {
 	if (isCovered(t, x, y)) {
+		if (!isMarked(t, x, y) && (t->num_minas <= 0)) {
+			beep();
+			return;
+		} /* if */
 		t->tablero[y][x] ^= ISMARKED;
-		move(y + 2, 2*x + 2);
-		if (isMarked(t, x, y)) addstr("@");
-		else addstr(".");
-	} else {
-		beep();
-	}
+		drawCell(t, x, y);
+		if (isMarked(t, x, y))
+			t->num_minas--;
+		else	t->num_minas++;
+	} /* if */
 } /* switchMarked */
 
 void uncover(struct tablero *t, int x, int y)
 {
-	t->tablero[y][x] &= ~ISCOVERED;
+	if (!isCovered(t, x, y)) return;
+	t->tablero[y][x] ^= ISCOVERED;
 	drawCell(t, x, y);
+	if (!isMine(t, x, y)) t->quedan--;
 } /* uncover */
 
 void drawCell(struct tablero *t, int x, int y)
@@ -203,14 +209,13 @@ void doJugada(struct tablero *t, int x, int y)
 					uncover(t, x, y);
 		} /* block */
 		mvaddstr(y+2, 2*x+1, "[*]");
-		mvaddstr(t->lin+3, 0, "HA PISADO UNA MINA!!!");
+		message(t, "HA PISADO UNA MINA!!!");
 		beep();
 		refresh();
 		sleep(3);
 		endwin();
 		exit(1);
 	} /* if */
-	t->quedan--;
 	/* !isMarked && !isMine */
 	if (numMines(t, x, y) == 0) {
 		doJugada(t, x-1, y-1);
@@ -224,4 +229,21 @@ void doJugada(struct tablero *t, int x, int y)
 	} /* if */
 } /* doJugada */
 
-/* $Id: tablero.c,v 1.2 2014/04/09 14:44:43 luis Exp $ */
+int messagev(struct tablero *t, char *fmt, va_list l)
+{
+	move(t->lin+3,0); clrtoeol();
+	return vwprintw(stdscr, fmt, l);
+} /* messagev */
+
+int message(struct tablero *t, char *fmt, ...)
+{
+	va_list l;
+	int res;
+	va_start(l, fmt);
+	res = messagev(t, fmt, l);
+	va_end(l);
+	return res;
+} /* message */
+	
+
+/* $Id: tablero.c,v 1.3 2014/04/10 13:03:16 luis Exp $ */

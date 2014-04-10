@@ -1,4 +1,4 @@
-/* $Id: tablero.h,v 1.1 2014/04/09 13:59:41 luis Exp $
+/* $Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:44:19 CEST 2014
  * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -9,8 +9,10 @@
 #ifndef _TABLERO_H
 #define _TABLERO_H
 
+#include <stdarg.h>
 #include <curses.h>
-static char RCS_Id_tablero_h[] = "\n$Id: tablero.h,v 1.1 2014/04/09 13:59:41 luis Exp $\n"; 
+
+static char RCS_Id_tablero_h[] = "\n$Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $\n"; 
 
 #ifndef NULL
 #define NULL 0
@@ -36,13 +38,15 @@ static char RCS_Id_tablero_h[] = "\n$Id: tablero.h,v 1.1 2014/04/09 13:59:41 lui
 
 #define KEY_ESC		'\033'
 #define KEY_ESP		' '
+#define CONTROL(X)	((X) ^ '@')
+#define KEY_CTRL_L	CONTROL('L')
 
 #define PROBAB			12	/* la probabilidad por defecto de mina */
 
 #define randomize() srand (time (0))
 #define random(N) (rand () % (N))
 
-#define MASCARA	0x0f
+#define MASCARA		0x0f
 #define ISMINE		0x10
 #define ISCOVERED	0x20
 #define ISMARKED	0x40
@@ -68,6 +72,8 @@ void drawCell(struct tablero *t, int x, int y);
 void drawTablero(struct tablero *t);
 void setCursor(struct tablero *t);
 void doJugada(struct tablero *t, int x, int y);
+int message(struct tablero *t, char *fmt, ...);
+int messagev(struct tablero *t, char *fmt, va_list l);
 
 #endif /* _TABLERO_H */
-/* $Id: tablero.h,v 1.1 2014/04/09 13:59:41 luis Exp $ */
+/* $Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $ */
