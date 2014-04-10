@@ -1,7 +1,7 @@
-/* $Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $
+/* $Id: tablero.h,v 1.3 2014/04/10 14:07:35 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:44:19 CEST 2014
- * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
  * 			All rights reserved.
  */
 
@@ -12,7 +12,7 @@
 #include <stdarg.h>
 #include <curses.h>
 
-static char RCS_Id_tablero_h[] = "\n$Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $\n"; 
+static char RCS_Id_tablero_h[] = "\n$Id: tablero.h,v 1.3 2014/04/10 14:07:35 luis Exp $\n"; 
 
 #ifndef NULL
 #define NULL 0
@@ -76,4 +76,4 @@ int message(struct tablero *t, char *fmt, ...);
 int messagev(struct tablero *t, char *fmt, va_list l);
 
 #endif /* _TABLERO_H */
-/* $Id: tablero.h,v 1.2 2014/04/10 13:03:16 luis Exp $ */
+/* $Id: tablero.h,v 1.3 2014/04/10 14:07:35 luis Exp $ */

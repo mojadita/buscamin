@@ -1,7 +1,7 @@
-/* $Id: tablero.c,v 1.3 2014/04/10 13:03:16 luis Exp $
+/* $Id: tablero.c,v 1.4 2014/04/10 14:07:35 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
- * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
  * 			All rights reserved.
  */
 
@@ -209,6 +209,7 @@ void doJugada(struct tablero *t, int x, int y)
 					uncover(t, x, y);
 		} /* block */
 		mvaddstr(y+2, 2*x+1, "[*]");
+		NUMBER(t);
 		message(t, "HA PISADO UNA MINA!!!");
 		beep();
 		refresh();
@@ -246,4 +247,4 @@ int message(struct tablero *t, char *fmt, ...)
 } /* message */
 	
 
-/* $Id: tablero.c,v 1.3 2014/04/10 13:03:16 luis Exp $ */
+/* $Id: tablero.c,v 1.4 2014/04/10 14:07:35 luis Exp $ */
