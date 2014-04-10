@@ -1,4 +1,4 @@
-/* $Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $
+/* $Id: tablero.c,v 1.7 2014/04/10 15:08:50 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
  * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
@@ -12,7 +12,7 @@
 #include "tablero.h"
 
 static char RCS_Id_tablero_c[] =
-"\n$Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $\n";
+"\n$Id: tablero.c,v 1.7 2014/04/10 15:08:50 luis Exp $\n";
 
 struct tablero *new_tablero(int dim_x, int dim_y, int prob)
 {
@@ -123,32 +123,32 @@ void uncover(struct tablero *t, int x, int y)
 
 void drawCell(struct tablero *t, int x, int y)
 {
-	move(2 + y, 2 + 2*x);
+	move(2 + y, 1 + 2*x);
 	if (isCovered(t, x, y)) {
 		if (isMarked(t, x, y))
-			addstr("@");
+			addstr(" @");
 		else
-			addstr(".");
+			addstr(" .");
 	} else { /* !isCovered */
 		switch(t->tablero[y][x] & (ISMARKED | ISMINE)) {
 		case 0: /* nor marked nor mine nor covered */
 			switch(numMines(t, x, y)) {
-			case 0: addstr(" "); break;
-			case 1: addstr("1"); break;
-			case 2: addstr("2"); break;
-			case 3: addstr("3"); break;
-			case 4: addstr("4"); break;
-			case 5: addstr("5"); break;
-			case 6: addstr("6"); break;
-			case 7: addstr("7"); break;
+			case 0: addstr("  "); break;
+			case 1: addstr(" 1"); break;
+			case 2: addstr(" 2"); break;
+			case 3: addstr(" 3"); break;
+			case 4: addstr(" 4"); break;
+			case 5: addstr(" 5"); break;
+			case 6: addstr(" 6"); break;
+			case 7: addstr(" 7"); break;
 			} /* switch */
 			break;
 		case ISMARKED: /* MARKED, BUT NOT MINE */
-			addstr("?"); break;
+			addstr(" ?"); break;
 		case ISMINE: /* MINE, BUT NOT MARKED */
-			addstr("#"); break;
+			addstr(" #"); break;
 		case ISMINE | ISMARKED:
-			addstr("!"); break;
+			addstr(" !"); break;
 		} /* switch */
 	} /* if */
 } /* drawCell */
@@ -250,4 +250,4 @@ int message(struct tablero *t, char *fmt, ...)
 } /* message */
 	
 
-/* $Id: tablero.c,v 1.6 2014/04/10 14:37:37 luis Exp $ */
+/* $Id: tablero.c,v 1.7 2014/04/10 15:08:50 luis Exp $ */
