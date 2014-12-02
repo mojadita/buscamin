@@ -1,0 +1,7 @@
+Mine sweeper.  Curses based game of mine sweeper.  You have to
+discover the mines before they make you explode on stepping
+over them.
+
+(C) 1993-2014 Luis Colorado <lc@luiscoloradosistemas.com>
+This program is open source.  You can distribute it under the
+GPL license. GPL document can be downloaded from www.gnu.org.
