@@ -8,8 +8,23 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <libintl.h>
+#include <locale.h>
+
 #include "tablero.h"
 #include "iniciali.h"
+
+#define D(S) __FILE__":%d: %s: " S, __LINE__, __func__
+#define DEB(ST) do { ST; fprintf(stderr, D("%s\n"), #ST); } while (0)
+
+#ifndef PACKAGE
+#error PACKAGE must be defined for this to be compilable.
+#endif
+#ifndef LOCALEDIR
+#error LOCALEDIR must be defined for this to be compilable.
+#endif
 
 static char RCS_Id[] =
 "\n$Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $\n";
@@ -19,6 +34,11 @@ int main (int argc, char **argv)
 	int c;
 	int n = 0; /* numero de posiciones a mover */
 	struct tablero *t;
+    char *s;
+
+    setlocale(LC_ALL, "");
+    bindtextdomain(PACKAGE, LOCALEDIR);
+    s = textdomain(PACKAGE);
 
 	initscr();
 	t = inicializa_tablero (argc, argv);
@@ -45,7 +65,7 @@ int main (int argc, char **argv)
 			break;
 
 		case 'Q': case 'q':
-			message(t, "Saliendo a peticion del usuario");
+			message(t, gettext("Exiting by user request"));
 			NUMBER(t);
 			refresh();
 			endwin ();
@@ -105,10 +125,9 @@ int main (int argc, char **argv)
 			if (isCovered(t, t->x, t->y)) {
 				switchMarked(t, t->x, t->y);
 				message(t,
-					"Marca %s en (%d, %d)",
-					isMarked(t, t->x, t->y)
-						? "puesta"
-						: "quitada",
+                    isMarked(t, t->x, t->y)
+                        ? gettext("Mark set at position (%d, %d)")
+                        : gettext("Mark clear at position (%d, %d)"),
 					t->x, t->y);
 				break;
 			} /* if */
@@ -129,12 +148,12 @@ int main (int argc, char **argv)
 				doJugada(t, t->x+1, t->y-1);
 				doJugada(t, t->x+1, t->y  );
 				doJugada(t, t->x+1, t->y+1);
-				message(t, "Jugamos 8 casillas adyacentes");
+				message(t, gettext("Playing eight neighbour places"));
 			} else
 				doJugada(t, t->x, t->y);
 			if (!t->quedan) {
 				NUMBER(t);
-				message(t, "LAS SACASTE TODAS!!!");
+				message(t, gettext("YOU WIN!!!"));
 				beep();
 				refresh();
 				sleep(3);
@@ -142,12 +161,12 @@ int main (int argc, char **argv)
 				exit(0);
 			} /* if */
 			if (t->quedan < 10)
-				message(t, "Quedan: %d", t->quedan);
+				message(t, gettext("%d mines left"), t->quedan);
 			break;
 
 		default: n = 0;
 			beep ();
-			message(t, "");
+			message(t, gettext("Incorrect key hit!"));
 			break;
 
 		} /* switch */

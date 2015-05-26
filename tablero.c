@@ -183,8 +183,8 @@ void drawTablero(struct tablero *t)
 
 	clear();
 	mvaddstr(0,0,
-			"BUSCAMIN V-1.0: (C) 1.995-2.014 Luis Colorado "
-			"<lc@luiscoloradosistemas.com>");
+			PACKAGE " V-" VERSION ": (C) 1.995-2.015 by Luis Colorado "
+			"<luiscoloradourcola@gmail.com>");
 	drawFrame(t);
 	for (y = 0; y < t->lin; y++)
 		for (x = 0; x < t->col; x++)
@@ -213,7 +213,7 @@ void doJugada(struct tablero *t, int x, int y)
 		} /* block */
 		mvaddstr(y+2, 2*x+1, "[*]");
 		NUMBER(t);
-		message(t, "HA PISADO UNA MINA!!!");
+		message(t, gettext("YOU HAVE STEP OVER A MINE!!!"));
 		beep();
 		refresh();
 		sleep(3);

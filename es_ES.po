@@ -1,0 +1,53 @@
+# Curses based Minesweeper.
+# Copyright (C) 1995-2015
+# This file is distributed under the same license as the buscamin package.
+# Luis Colorado <luiscoloradourcola@gmail.com>, 2015.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-23 11:06+0300\n"
+"PO-Revision-Date: 2015-05-23 11:10+0300\n"
+"Last-Translator: LUIS COLORADO <luiscoloradourcola@gmail.com>\n"
+"Language-Team: LUIS COLORADO <luiscoloradourcola@gmail.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.c:58
+msgid "Exiting by user request"
+msgstr "Saliendo a petición del usuario"
+
+#: main.c:119
+#, c-format
+msgid "Mark set at position (%d, %d)"
+msgstr "Marca colocada en la posición (%d, %d)"
+
+#: main.c:120
+#, c-format
+msgid "Mark clear at position (%d, %d)"
+msgstr "Marca eliminada en la posición (%d, %d)"
+
+#: main.c:141
+msgid "Playing eight neighbour places"
+msgstr "Jugando las ocho casillas vecinas"
+
+#: main.c:146
+msgid "YOU WIN!!!"
+msgstr "¡¡¡USTED GANA!!!"
+
+#: main.c:154
+#, c-format
+msgid "%d mines left"
+msgstr "Quedan %d minas"
+
+#: main.c:159
+msgid "Incorrect key hit!"
+msgstr "¡Se ha pulsado una tecla incorrecta!"
+
+#: tablero.c:216
+msgid "YOU HAVE STEP OVER A MINE!!!"
+msgstr "¡¡¡ACABA DE PISAR UNA MINA!!! ¡¡¡BOOOOMMMMMMMMM!!!"

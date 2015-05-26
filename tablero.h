@@ -5,12 +5,18 @@
  * 			All rights reserved.
  */
 
-
 #ifndef _TABLERO_H
 #define _TABLERO_H
 
 #include <stdarg.h>
 #include <curses.h>
+
+#include <libintl.h>
+#if 0
+#define _(X) gettext (X)
+#define gettext_noop(X) X
+#define N_(X) gettext_noop(X)
+#endif
 
 static char RCS_Id_tablero_h[] =
 "\n$Id: tablero.h,v 1.4 2014/04/10 14:18:22 luis Exp $\n"; 

@@ -5,21 +5,46 @@
 #		All rights reserved.
 # 
 
-RM=rm -f
+package = buscamin
+version = 1.2
 
-.PHONY: all clean
+bindir = /usr/bin
+localedir = /usr/share/locale
 
-all: buscamin
+langs = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES
+targets = $(package) $(langs:=.mo)
+
+install = install
+
+.PHONY: all clean install
+.SUFFIXES: .c .o .pot .po .mo
+
+all: $(targets)
 clean:
-	$(RM) buscamin $(BUSCAMIN_OBJS)
+	$(RM) buscamin $($(package)_objs) $(langs:=.mo)
+install: $(targets)
+	for i in $(langs); do \
+		install -m 0555 -o root -g root -d $(localedir)/$$i/LC_MESSAGES; \
+	done
+	$(install) -m 0111 -o root -g root buscamin $(bindir)/buscamin
+	for i in $(langs) ; do \
+		$(install) -m 0444 -o root -g root $$i.mo \
+		$(localedir)/$$i/LC_MESSAGES/$(package).mo; done
 
-CFLAGS=-I/usr/include/ncurses -g
+CFLAGS=-I/usr/include/ncurses -g -DPACKAGE=\""$(package)"\" \
+	   -DVERSION=\""$(version)"\" -DLOCALEDIR=\""$(localedir)"\"
 
-BUSCAMIN_OBJS=main.o iniciali.o tablero.o
-buscamin: $(BUSCAMIN_OBJS)
-	$(CC) -o buscamin $(BUSCAMIN_OBJS) -lncurses
+$(package)_objs=main.o iniciali.o tablero.o
+$(package): $($(package)_objs)
+	$(CC) -o $(package) $($(package)_objs) -lncursesw
 
-$(BUSCAMIN_OBJS): tablero.h
+$($(package)_objs): tablero.h
 main.o iniciali.o: iniciali.h
+
+%.mo: %.po
+	msgfmt -o $@ $<
+
+$(langs:=.po): $(package).pot
+	msgmerge -U $@ $<
 
 # $Id: Makefile,v 1.7 2014/04/10 14:14:20 luis Exp $

@@ -25,6 +25,7 @@ struct tablero *inicializa_tablero (int argc, char **argv)
 
 	filas = maxfilas;
 	columnas = maxcolumnas;
+
 	while((res = getopt(argc, argv, "r:c:p:m")) != EOF) {
 		switch(res) {
 		case 'r': filas		= atoi(optarg);	break;
