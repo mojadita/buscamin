@@ -41,7 +41,7 @@ msgstr ""
 
 #: main.c:154
 #, c-format
-msgid "%d mines left"
+msgid "%d places left"
 msgstr ""
 
 #: main.c:159

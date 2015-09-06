@@ -161,7 +161,7 @@ int main (int argc, char **argv)
 				exit(0);
 			} /* if */
 			if (t->quedan < 10)
-				message(t, gettext("%d mines left"), t->quedan);
+				message(t, gettext("%d places left"), t->quedan);
 			break;
 
 		default: n = 0;

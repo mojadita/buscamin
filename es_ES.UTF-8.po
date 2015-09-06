@@ -41,8 +41,8 @@ msgstr "¡¡¡USTED GANA!!!"
 
 #: main.c:154
 #, c-format
-msgid "%d mines left"
-msgstr "Quedan %d minas"
+msgid "%d places left"
+msgstr "Quedan %d lugares por jugar"
 
 #: main.c:159
 msgid "Incorrect key hit!"
