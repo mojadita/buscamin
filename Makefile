@@ -8,13 +8,15 @@
 package = buscamin
 version = 1.2
 
-bindir = /usr/bin
-localedir = /usr/share/locale
+prefix = $(HOME)
+bindir = $(prefix)/bin
+localedir = $(prefix)/share/locale
 
 langs = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES
 targets = $(package) $(langs:=.mo)
 
-install = install
+INSTALL = install -o `id -u` -g `id -u`
+RM = rm -f
 
 .PHONY: all clean install
 .SUFFIXES: .c .o .pot .po .mo
@@ -23,25 +25,39 @@ all: $(targets)
 clean:
 	$(RM) buscamin $($(package)_objs) $(langs:=.mo)
 install: $(targets)
-	for i in $(langs); do \
-		install -m 0555 -o root -g root -d $(localedir)/$$i/LC_MESSAGES; \
+	-@for i in $(langs); do \
+		echo $(INSTALL) -m 0755 -d $(localedir)/$$i/LC_MESSAGES; \
+		$(INSTALL) -m 0755 -d $(localedir)/$$i/LC_MESSAGES; \
 	done
-	$(install) -m 0111 -o root -g root buscamin $(bindir)/buscamin
-	for i in $(langs) ; do \
-		$(install) -m 0444 -o root -g root $$i.mo \
-		$(localedir)/$$i/LC_MESSAGES/$(package).mo; done
+	-$(INSTALL) -m 0711 buscamin $(bindir)/buscamin
+	-@for i in $(langs) ; \
+	do \
+		echo $(INSTALL) -m 0644 $$i.mo \
+		$(localedir)/$$i/LC_MESSAGES/$(package).mo; \
+		$(INSTALL) -m 0644 $$i.mo \
+		$(localedir)/$$i/LC_MESSAGES/$(package).mo; \
+	done
+deinstall:
+	-$(RM) $(bindir)/buscamin
+	-@for i in $(langs) ; \
+	do \
+		echo $(RM) $(localedir)/$$i/LC_MESSAGES/$(package).mo; \
+		$(RM) $(localedir)/$$i/LC_MESSAGES/$(package).mo; \
+	done
 
-CFLAGS=-I/usr/include/ncurses -g -DPACKAGE=\""$(package)"\" \
+CFLAGS=-I/usr/local/include -I/usr/include/ncurses -g -DPACKAGE=\""$(package)"\" \
 	   -DVERSION=\""$(version)"\" -DLOCALEDIR=\""$(localedir)"\"
+LDFLAGS=-L/usr/local/lib
 
 $(package)_objs=main.o iniciali.o tablero.o
+$(package)_libs= -lintl -lncursesw
 $(package): $($(package)_objs)
-	$(CC) -o $(package) $($(package)_objs) -lncursesw
+	$(CC) $(LDFLAGS) -o $(package) $($(package)_objs) $($(package)_libs)
 
 $($(package)_objs): tablero.h
 main.o iniciali.o: iniciali.h
 
-%.mo: %.po
+.po.mo:
 	msgfmt -o $@ $<
 
 $(langs:=.po): $(package).pot
