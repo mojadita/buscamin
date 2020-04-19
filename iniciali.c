@@ -1,13 +1,16 @@
 /* $Id: iniciali.c,v 1.8 2014/04/10 14:18:22 luis Exp $
  * inicializa_tablero.c -- funcion para inicializar el tablero.
- * Autor: Luis Colorado.
+ * Autor: Luis Colorado <luiscoloradourcola@gmail.com>
  * Version: 1.00 (30.1.93)
+ * Copyright: (c) 1993-2020 Luis Colorado.  All rights reserved.
+ * License: BSD
  */
 
-/*#include <malloc.h>*/
 #include <stdlib.h>
 #include <assert.h>
 #include <getopt.h>
+#include <time.h>
+
 #include "tablero.h"
 
 static char RCS_Id_INICIALI_C[] =

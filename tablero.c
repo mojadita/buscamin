@@ -1,14 +1,17 @@
 /* $Id: tablero.c,v 1.7 2014/04/10 15:08:50 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:50:38 CEST 2014
- * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993-2020 LUIS COLORADO SISTEMAS S.L.U.
  * 			All rights reserved.
+ * License: BSD
  */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <curses.h>
 #include <assert.h>
+#include <unistd.h>
+
 #include "tablero.h"
 
 static char RCS_Id_tablero_c[] =

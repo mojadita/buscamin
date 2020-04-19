@@ -1,8 +1,9 @@
 /* $Id: tablero.h,v 1.4 2014/04/10 14:18:22 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: mar abr  8 09:44:19 CEST 2014
- * Disclaimer: (C) 1993--2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993-2020 LUIS COLORADO SISTEMAS S.L.U.
  * 			All rights reserved.
+ * License: BSD
  */
 
 #ifndef _TABLERO_H
@@ -10,6 +11,7 @@
 
 #include <stdarg.h>
 #include <curses.h>
+#include <stdlib.h>
 
 #include <libintl.h>
 #if 0
@@ -70,6 +72,7 @@ struct tablero {
 struct tablero *new_tablero (int dim_x, int dim_y, int prob);
 int isCovered(struct tablero *t, int x, int y);
 int isMarked(struct tablero *t, int x, int y);
+void switchMarked(struct tablero *t, int x, int y);
 int isMine(struct tablero *t, int x, int y);
 int numMines(struct tablero *t, int x, int y);
 int numMarks(struct tablero *t, int x, int y);

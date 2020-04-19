@@ -1,8 +1,9 @@
 /* $Id: iniciali.h,v 1.2 2014/04/10 14:18:22 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>Q
  * Date: mié abr  9 12:22:45 CEST 2014
- * Disclaimer: (C) 2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993-2020 LUIS COLORADO SISTEMAS S.L.U.
  * 				All rights reserved.
+ * License: BSD
  */ 
 
 #ifndef _INICIALI_H

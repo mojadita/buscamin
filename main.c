@@ -2,8 +2,9 @@
  * main.c -- programa principal del juego del buscaminas.
  * Autor: Luis Colorado <lc@luiscoloradosistemas.com>
  * Version: 1.00 (30.1.93)
- * Disclaimer: (C) 1993-2014 LUIS COLORADO SISTEMAS S.L.U.
+ * Disclaimer: (C) 1993-2020 LUIS COLORADO SISTEMAS S.L.U.
  * 				All rights reserved.
+ * License: BSD
  */
 
 #include <stdlib.h>
@@ -12,6 +13,7 @@
 #include <string.h>
 #include <libintl.h>
 #include <locale.h>
+#include <unistd.h>
 
 #include "tablero.h"
 #include "iniciali.h"
