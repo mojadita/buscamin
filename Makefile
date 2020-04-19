@@ -6,7 +6,7 @@
 # 
 
 package = buscamin
-version = 1.2
+version = 1.3
 
 prefix = $(HOME)
 bindir = $(prefix)/bin

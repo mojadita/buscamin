@@ -186,7 +186,7 @@ void drawTablero(struct tablero *t)
 
 	clear();
 	mvaddstr(0,0,
-			PACKAGE " V-" VERSION ": (C) 1.995-2.015 by Luis Colorado "
+			PACKAGE " V-" VERSION ": (C) 1.993-2.020 by Luis Colorado "
 			"<luiscoloradourcola@gmail.com>");
 	drawFrame(t);
 	for (y = 0; y < t->lin; y++)
