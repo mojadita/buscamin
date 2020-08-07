@@ -12,7 +12,7 @@ prefix = $(HOME)
 bindir = $(prefix)/bin
 localedir = $(prefix)/share/locale
 
-langs = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES
+langs = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8
 targets = $(package) $(langs:=.mo)
 
 INSTALL = install -o `id -u` -g `id -u`
