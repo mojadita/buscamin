@@ -8,7 +8,7 @@
 package = buscamin
 version = 1.3
 
-prefix = $(HOME)
+prefix = /usr/local
 bindir = $(prefix)/bin
 localedir = $(prefix)/share/locale
 
