@@ -3,3 +3,14 @@ buscamin
 tags
 CVS/
 *.mo
+es_CO.UTF-8.po
+es_ES.ASCII.po
+es_ES.ISO-8859-1.po
+es_ES.UTF-8.po
+es_ES.po
+fr_FR.UTF-8.po
+config.h
+config.h.in
+ru_RU.UTF-8.po
+tablero.c~
+tablero.h~

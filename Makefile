@@ -20,7 +20,7 @@ FMOD = 0444
 XMOD = 0555
 DMOD = 0555
 
-langs     = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8 ru_RU.UTF-8
+langs     = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8 ru_RU.UTF-8 fr_FR.UTF-8
 targets   = $(PROGRAM_NAME) $(langs:=.mo)
 toclean   = $(PROGRAM_NAME) $(langs:=.mo) $(langs:=.po)
 toinstall =                                            \

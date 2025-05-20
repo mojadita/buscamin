@@ -1,0 +1,54 @@
+# Curses based Minesweeper.
+# Author: Luis Colorado <luiscoloradourcola@gmail.com>
+# Date: Tue May 20 13:54:43 EEST 2025
+# Copyright (C) 1993-2015 Luis Colorado.  All rights reserved
+# License: BSD
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@ @VERSION@\n"
+"Report-Msgid-Bugs-To: @AUTHOR_NAME@ <@AUTHOR_EMAIL@>\n"
+"POT-Creation-Date: 2015-05-23 11:06+0300\n"
+"PO-Revision-Date: @BUILD_DATE@\n"
+"Last-Translator: Google Translator\n"
+"Language-Team: @AUTHOR_NAME@ <@AUTHOR_EMAIL@>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.c:58
+msgid "Exiting by user request"
+msgstr "Выход по желанию пользователя."
+
+#: main.c:119
+#, c-format
+msgid "Mark set at position (%d, %d)"
+msgstr "Установка сигнала в положение (%d, %d)"
+
+#: main.c:120
+#, c-format
+msgid "Mark clear at position (%d, %d)"
+msgstr "Удаление сигнала в позиции (%d, %d)"
+
+#: main.c:141
+msgid "Playing eight neighbour places"
+msgstr "Игра на 8 соседних позициях"
+
+#: main.c:146
+msgid "YOU WIN!!!"
+msgstr "Он победил!!!"
+
+#: main.c:154
+#, c-format
+msgid "%d places left"
+msgstr "Осталось отметить %d позиций"
+
+#: main.c:159
+msgid "Incorrect key hit!"
+msgstr "Вы нажали не ту клавишу"
+
+#: tablero.c:216
+msgid "YOU HAVE STEP OVER A MINE!!!"
+msgstr "Вы наступили на мину!!!"
