@@ -12,5 +12,4 @@ fr_FR.UTF-8.po
 config.h
 config.h.in
 ru_RU.UTF-8.po
-tablero.c~
-tablero.h~
+.depend
