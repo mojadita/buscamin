@@ -41,10 +41,10 @@ clean:
 install: $(toinstall)
 
 $(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:S:$:.mo:) $(@:H)
-	$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:S:$:.mo:) $@
+	-$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:S:$:.mo:) $@
 
 $(bindir)/$(PROGRAM_NAME): $(@:T) $(@:H)
-	$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
+	-$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
 
 $(toinstall:H):
 	-$(INSTALL) $(IFLAGS) -m $(DMOD) -d $@
@@ -64,14 +64,10 @@ LIBS              = $(LIBS-$(OS))
 LDFLAGS           = $(LDFLAGS-$(OS))
 
 $(PROGRAM_NAME)_objs=main.o iniciali.o tablero.o
+toclean += $($(PROGRAM_NAME)_objs)
 
 $(PROGRAM_NAME): $($(PROGRAM_NAME)_objs)
 	$(CC) $(LDFLAGS) -o $@ $($@_objs) $(LIBS)
 
-$($(PROGRAM_NAME)_objs): tablero.h config.h
-main.o iniciali.o: iniciali.h
-
 config.h.in: config.mk config.h.in.sh
 	config.h.in.sh < config.mk >config.h.in
-
-# $Id: Makefile,v 1.7 2014/04/10 14:14:20 luis Exp $
