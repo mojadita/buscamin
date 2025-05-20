@@ -1,9 +1,7 @@
-/* $Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $
- * main.c -- programa principal del juego del buscaminas.
- * Autor: Luis Colorado <lc@luiscoloradosistemas.com>
+/* main.c -- programa principal del juego del buscaminas.
+ * Autor: Luis Colorado <luiscoloradourcola@gmail.com>
  * Version: 1.00 (30.1.93)
- * Disclaimer: (C) 1993-2020 LUIS COLORADO SISTEMAS S.L.U.
- *              All rights reserved.
+ * Disclaimer: (C) 1993-2020 Luis Colorado.  All rights reserved.
  * License: BSD
  */
 
@@ -15,45 +13,46 @@
 #include <locale.h>
 #include <unistd.h>
 
+#include "config.h"
 #include "tablero.h"
 #include "iniciali.h"
 
 #define D(S) __FILE__":%d: %s: " S, __LINE__, __func__
-#define DEB(ST) do { ST; fprintf(stderr, D("%s\n"), #ST); } while (0)
+#define DEB(ST) do {                     \
+        ST;                              \
+        fprintf(stderr, D("%s\n"), #ST); \
+        } while (0)
 
-#ifndef PACKAGE
-#error PACKAGE must be defined for this to be compilable.
-#endif
-#ifndef LOCALEDIR
-#error LOCALEDIR must be defined for this to be compilable.
-#endif
+#ifndef   PROGRAM_NAME /* { */
+#error    PROGRAM_NAME must be defined for this compilation unit to be compilable.
+#endif /* PROGRAM_NAME    } */
+#ifndef   LOCALEDIR /* { */
+#error    LOCALEDIR must be defined for this compilation unit to be compilable.
+#endif /* LOCALEDIR    } */
 
-static char RCS_Id[] =
-"\n$Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $\n";
-
-int main (int argc, char **argv)
+int
+main(
+        int    argc,
+        char **argv)
 {
-    int c;
     int n = 0; /* numero de posiciones a mover */
-    struct tablero *t;
-    char *s;
 
     setlocale(LC_ALL, "");
-    bindtextdomain(PACKAGE, LOCALEDIR);
-    s = textdomain(PACKAGE);
+    bindtextdomain(PROGRAM_NAME, LOCALEDIR);
+    textdomain(PROGRAM_NAME);
 
     initscr();
-    t = inicializa_tablero (argc, argv);
-    raw();
+    struct tablero *t = inicializa_tablero (argc, argv);
+    raw();    /* curses initialization */
     noecho();
     cbreak();
     keypad (stdscr, 1);
     drawTablero(t);
-    for (;;) {
+    for (;;) { /* main loop */
         NUMBER(t);
         setCursor(t);
         refresh();
-        c = getch();
+        int c = getch();
 
         switch (c) {
         case '0': case '1': case '2': case '3': case '4':
@@ -174,5 +173,3 @@ int main (int argc, char **argv)
         } /* switch */
     } /* for(;;) */
 } /* main */
-
-/* $Id: main.c,v 1.17 2014/04/10 14:18:22 luis Exp $ */

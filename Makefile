@@ -5,62 +5,73 @@
 #		All rights reserved.
 # 
 
-package = buscamin
-version = 1.3
+# OPERATING SYSTEM SUPPORT
 
-prefix = /usr/local
-bindir = $(prefix)/bin
-localedir = $(prefix)/share/locale
+.include "config-lib.mk"
 
-langs = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8
-targets = $(package) $(langs:=.mo)
+OWN-FreeBSD   = root
+OWN-GNU/Linux = bin
+GRP-FreeBSD   = wheel
+GRP-GNU/Linux = bin
 
-INSTALL = install -o `id -u` -g `id -u`
-RM = rm -f
+OWN = $(OWN-$(OS))
+GRP = $(GRP-$(OS))
+FMOD = 0444
+XMOD = 0555
+DMOD = 0555
+
+langs     = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8 ru_RU.UTF-8
+targets   = $(PROGRAM_NAME) $(langs:=.mo)
+toclean   = $(PROGRAM_NAME) $(langs:=.mo) $(langs:=.po)
+toinstall =                                            \
+		$(langs:@v@$(localedir)/$v/LC_MESSAGES/$(PROGRAM_NAME).mo@) \
+		$(bindir)/$(PROGRAM_NAME)
+
+INSTALL   = install
+IFLAGS    = -o $(OWN) -g $(GRP)
+RM        = rm -f
 
 .PHONY: all clean install
-.SUFFIXES: .c .o .pot .po .mo
 
 all: $(targets)
+
 clean:
-	$(RM) buscamin $($(package)_objs) $(langs:=.mo)
-install: $(targets)
-	-@for i in $(langs); do \
-		echo $(INSTALL) -m 0755 -d $(localedir)/$$i/LC_MESSAGES; \
-		$(INSTALL) -m 0755 -d $(localedir)/$$i/LC_MESSAGES; \
-	done
-	-$(INSTALL) -m 0711 buscamin $(bindir)/buscamin
-	-@for i in $(langs) ; \
-	do \
-		echo $(INSTALL) -m 0644 $$i.mo \
-		$(localedir)/$$i/LC_MESSAGES/$(package).mo; \
-		$(INSTALL) -m 0644 $$i.mo \
-		$(localedir)/$$i/LC_MESSAGES/$(package).mo; \
-	done
-deinstall:
-	-$(RM) $(bindir)/buscamin
-	-@for i in $(langs) ; \
-	do \
-		echo $(RM) $(localedir)/$$i/LC_MESSAGES/$(package).mo; \
-		$(RM) $(localedir)/$$i/LC_MESSAGES/$(package).mo; \
-	done
+	$(RM) $(toclean)
 
-CFLAGS=-I/usr/local/include -I/usr/include/ncurses -g -DPACKAGE=\""$(package)"\" \
-	   -DVERSION=\""$(version)"\" -DLOCALEDIR=\""$(localedir)"\"
-LDFLAGS=-L/usr/local/lib
+install: $(toinstall)
 
-$(package)_objs=main.o iniciali.o tablero.o
-$(package)_libs= -lintl -lncursesw
-$(package): $($(package)_objs)
-	$(CC) $(LDFLAGS) -o $(package) $($(package)_objs) $($(package)_libs)
+$(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:S:$:.mo:) $(@:H)
+	$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:S:$:.mo:) $@
 
-$($(package)_objs): tablero.h
+$(bindir)/$(PROGRAM_NAME): $(@:T) $(@:H)
+	$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
+
+$(toinstall:H):
+	-$(INSTALL) $(IFLAGS) -m $(DMOD) -d $@
+
+deinstall uninstall:
+	-$(RM) $(toinstall)
+
+CFLAGS-FreeBSD    = -I/usr/local/include -I/usr/include/ncurses
+CFLAGS-GNU/Linux  =
+LDFLAGS-FreeBSD   = -L/usr/local/lib
+LDFLAGS-GNU/Linux =
+LIBS-FreeBSD      = -lintl -lncursesw
+LIBS-GNU/Linux    = -lncursesw
+
+CFLAGS            = $(CFLAGS-$(OS))
+LIBS              = $(LIBS-$(OS))
+LDFLAGS           = $(LDFLAGS-$(OS))
+
+$(PROGRAM_NAME)_objs=main.o iniciali.o tablero.o
+
+$(PROGRAM_NAME): $($(PROGRAM_NAME)_objs)
+	$(CC) $(LDFLAGS) -o $@ $($@_objs) $(LIBS)
+
+$($(PROGRAM_NAME)_objs): tablero.h config.h
 main.o iniciali.o: iniciali.h
 
-.po.mo:
-	msgfmt -o $@ $<
-
-$(langs:=.po): $(package).pot
-	msgmerge -U $@ $<
+config.h.in: config.mk config.h.in.sh
+	config.h.in.sh < config.mk >config.h.in
 
 # $Id: Makefile,v 1.7 2014/04/10 14:14:20 luis Exp $
