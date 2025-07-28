@@ -7,12 +7,12 @@
 
 # OPERATING SYSTEM SUPPORT
 
-.include "config-lib.mk"
+include config-lib.mk
 
-OWN-FreeBSD   = root
-OWN-GNU/Linux = bin
-GRP-FreeBSD   = wheel
-GRP-GNU/Linux = bin
+OWN-FreeBSD         = root
+OWN-GNU/Linux       = bin
+GRP-FreeBSD         = wheel
+GRP-GNU/Linux       = bin
 
 OWN = $(OWN-$(OS))
 GRP = $(GRP-$(OS))
@@ -40,8 +40,8 @@ clean:
 
 install: $(toinstall)
 
-$(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:S:$:.mo:) $(@:H)
-	-$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:S:$:.mo:) $@
+$(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:=.mo) $(@:H)
+	-$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:=.mo) $@
 
 $(bindir)/$(PROGRAM_NAME): $(@:T) $(@:H)
 	-$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
@@ -70,4 +70,9 @@ $(PROGRAM_NAME): $($(PROGRAM_NAME)_objs)
 	$(CC) $(LDFLAGS) -o $@ $($@_objs) $(LIBS)
 
 config.h.in: config.mk config.h.in.sh
-	config.h.in.sh < config.mk >config.h.in
+	./config.h.in.sh < config.mk >config.h.in
+toclean += config.h.in config.h
+
+iniciali.o: iniciali.c  tablero.h
+main.o: main.c  config.h tablero.h  iniciali.h
+tablero.o: tablero.c  config.h  tablero.h
