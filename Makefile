@@ -43,11 +43,11 @@ install: $(toinstall)
 $(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:=.mo) $(@:H)
 	-$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:=.mo) $@
 
+$(langs:@l@$(localedir)/$l/LC_MESSAGES@) $(langs:@l@$(localedir)/$l@): $(@:H)
+	-$(INSTALL) $(IFLAGS) -m $(DMOD) -d $@
+
 $(bindir)/$(PROGRAM_NAME): $(@:T) $(@:H)
 	-$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
-
-$(toinstall:H):
-	-$(INSTALL) $(IFLAGS) -m $(DMOD) -d $@
 
 deinstall uninstall:
 	-$(RM) $(toinstall)
