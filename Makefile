@@ -24,7 +24,7 @@ langs     = es_ES.ASCII es_ES.ISO-8859-1 es_ES.UTF-8 es_ES es_CO.UTF-8 ru_RU.UTF
 targets   = $(PROGRAM_NAME) $(langs:=.mo)
 toclean   = $(PROGRAM_NAME) $(langs:=.mo) $(langs:=.po)
 toinstall =                                            \
-		$(langs:@v@$(localedir)/$v/LC_MESSAGES/$(PROGRAM_NAME).mo@) \
+		$(langs:@lng@$(localedir)/$(lng)/LC_MESSAGES/$(PROGRAM_NAME).mo@) \
 		$(bindir)/$(PROGRAM_NAME)
 
 INSTALL   = install
@@ -40,13 +40,14 @@ clean:
 
 install: $(toinstall)
 
-$(langs:@l@$(localedir)/$l/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:=.mo) $(@:H)
+$(langs:@lng@$(localedir)/$(lng)/LC_MESSAGES/$(PROGRAM_NAME).mo@): $(@:H:H:T:=.mo) $(@:H)
 	-$(INSTALL) $(IFLAGS) -m $(FMOD) $(@:H:H:T:=.mo) $@
 
 $(langs:@l@$(localedir)/$l/LC_MESSAGES@) $(langs:@l@$(localedir)/$l@): $(@:H)
 	-$(INSTALL) $(IFLAGS) -m $(DMOD) -d $@
+	-touch $@
 
-$(bindir)/$(PROGRAM_NAME): $(@:T) $(@:H)
+$(bindir)/$(PROGRAM_NAME): $(@:T)
 	-$(INSTALL) $(IFLAGS) -m $(XMOD) $(@:T) $(@)
 
 deinstall uninstall:
